@@ -45,7 +45,7 @@ public class CodeGenerator {
         autoGenerator.setPackageInfo(packageConfig);
         //配置策略
         StrategyConfig strategyConfig = new StrategyConfig();
-//        strategyConfig.setInclude("students"); //设置要映射的表名
+     //   strategyConfig.setInclude("teacher"); //设置要映射的表名
         strategyConfig.setEntityLombokModel(true); //设置自动生成lombok
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
         strategyConfig.setColumnNaming(NamingStrategy.underline_to_camel);

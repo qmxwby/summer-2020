@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author dw
- * @since 2020-07-17
+ * @since 2020-07-27
  */
 @RestController
 @RequestMapping("/summer/students")

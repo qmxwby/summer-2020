@@ -15,7 +15,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author dw
- * @since 2020-07-17
+ * @since 2020-07-27
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -46,6 +46,9 @@ public class Students implements Serializable {
 
     @ApiModelProperty(value = "班级")
     private Integer stuClass;
+
+    @ApiModelProperty(value = "登录密码")
+    private String stuPassword;
 
 
 }

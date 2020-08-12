@@ -15,7 +15,7 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author dw
- * @since 2020-07-17
+ * @since 2020-07-27
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -43,6 +43,9 @@ public class Teacher implements Serializable {
 
     @ApiModelProperty(value = "职称")
     private String tProf;
+
+    @ApiModelProperty(value = "登录密码")
+    private String tPassword;
 
 
 }
