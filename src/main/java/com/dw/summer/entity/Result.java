@@ -15,8 +15,6 @@ import java.io.Serializable;
 public class Result implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @ApiModelProperty(value = "是否成功")
-    private Boolean flag;
 
     @ApiModelProperty(value = "状态码")
     private Integer code;

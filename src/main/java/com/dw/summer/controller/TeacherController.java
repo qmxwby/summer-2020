@@ -1,12 +1,17 @@
 package com.dw.summer.controller;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dw.summer.entity.Result;
 import com.dw.summer.entity.Teacher;
 import com.dw.summer.service.TeacherService;
+import com.dw.summer.vo.TeacherVO;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -29,12 +34,11 @@ public class TeacherController {
         Result res = new Result();
         Teacher teacher = teacherService.getById(t_id);
         if(teacher!=null){
-            res.setFlag(true);
             res.setData(teacher);
             res.setCode(200);
             res.setMsg("查询成功");
         }else {
-            res.setFlag(false);
+            res.setCode(500);
             res.setMsg("查询失败,无此用户");
         }
         return res;
@@ -47,16 +51,13 @@ public class TeacherController {
         Teacher teacher = teacherService.getById(t_id);
         if(teacher == null){
             res.setMsg("该用户不存在");
-            res.setCode(200);
-            res.setFlag(false);
+            res.setCode(500);
         } else if (!teacher.getTPassword().equals(password)){
             res.setMsg("用户名或密码不正确");
-            res.setCode(200);
-            res.setFlag(false);
+            res.setCode(500);
         } else {
             res.setMsg("登陆成功");
             res.setCode(200);
-            res.setFlag(true);
             res.setData(teacher);
         }
         return res;
@@ -68,12 +69,10 @@ public class TeacherController {
         Result res = new Result();
         boolean save = teacherService.save(teacher);
         if(save){
-            res.setFlag(save);
             res.setData(teacher);
             res.setCode(200);
             res.setMsg("插入成功！");
         } else {
-            res.setFlag(save);
             res.setData(null);
             res.setCode(500);
             res.setMsg("插入失败，可能有重复的学号！");
@@ -88,15 +87,32 @@ public class TeacherController {
         Teacher teacher = teacherService.getById(tid);
         if(teacher!=null){
             teacherService.removeById(tid);
-            res.setFlag(true);
             res.setMsg("删除成功！");
+            res.setCode(200);
             res.setData(teacher);
         }else{
-            res.setFlag(false);
+            res.setCode(500);
             res.setMsg("删除失败,用户不存在");
             res.setData(null);
         }
         return res;
+    }
+
+    @ApiOperation("获得所有教师的信息，并实现分页")
+    @GetMapping("/getAll/{pageNo}/{pageSize}")
+    public Result getAll(@PathVariable("pageNo")int pageNo,
+                         @PathVariable("pageSize")int pageSize){
+        Result result = new Result();
+        Page<TeacherVO> teacherVOPage = teacherService.findAllTeacher(new Page<>(pageNo,pageSize));
+        if(teacherVOPage.getRecords().size() == 0){
+            result.setCode(0);
+            result.setMsg("请求失败！");
+        }else {
+            result.setData(teacherVOPage);
+            result.setCode(200);
+            result.setMsg("请求成功!");
+        }
+        return result;
     }
 }
 
