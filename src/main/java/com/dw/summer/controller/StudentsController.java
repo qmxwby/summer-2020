@@ -1,6 +1,7 @@
 package com.dw.summer.controller;
 
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author dw
  * @since 2020-07-27
  */
+@CrossOrigin(origins = "*", maxAge = 3600)  //解决跨域问题
 @RestController
 @RequestMapping("/summer/students")
 public class StudentsController {
