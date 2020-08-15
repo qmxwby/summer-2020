@@ -75,7 +75,7 @@ public class TeacherController {
         } else {
             res.setData(null);
             res.setCode(500);
-            res.setMsg("插入失败，可能有重复的学号！");
+            res.setMsg("插入失败，可能有重复的教师编号！");
         }
         return res;
     }
@@ -112,6 +112,16 @@ public class TeacherController {
             result.setCode(200);
             result.setMsg("请求成功!");
         }
+        return result;
+    }
+
+    @ApiOperation("根据id对教师进行批量删除")
+    @DeleteMapping("/deleteByList")
+    public Result deleteByList(@RequestParam(value = "ids[]") List<String> ids) {
+        Result result = new Result();
+        teacherService.removeByIds(ids);
+        result.setCode(200);
+        result.setMsg("删除成功！");
         return result;
     }
 }
