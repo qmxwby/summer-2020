@@ -124,5 +124,17 @@ public class TeacherController {
         result.setMsg("删除成功！");
         return result;
     }
+
+    @ApiOperation("更新教师信息")
+    @PostMapping("/update")
+    public Result update(@RequestBody Teacher teacher){
+        Result result = new Result();
+        System.out.println(teacher);
+        teacherService.updateById(teacher);
+        result.setCode(200);
+        result.setData(teacher);
+        result.setMsg("更新成功");
+        return result;
+    }
 }
 
