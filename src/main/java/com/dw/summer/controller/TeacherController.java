@@ -116,7 +116,7 @@ public class TeacherController {
     }
 
     @ApiOperation("根据id对教师进行批量删除")
-    @DeleteMapping("/deleteByList")
+    @PostMapping("/deleteByList")
     public Result deleteByList(@RequestParam(value = "ids[]") List<String> ids) {
         Result result = new Result();
         teacherService.removeByIds(ids);
